@@ -69,7 +69,7 @@ public class DefaultDeliveryService implements DeliveryService {
         if (courier != null && courier.getArriveTimeTimestamp() != null) {
             long courierWaitingTimeInMs = analyticsService.sendOrderPickupEvent(courier, Instant.now().toEpochMilli());
             logger.info(
-                "Courier {} received order {}, the courier spend {} ms waiting for order",
+                "Courier {} received order {}, courier spend {} ms waiting for order",
                 courier.getId(),
                 order.getId(),
                 courierWaitingTimeInMs
@@ -83,12 +83,12 @@ public class DefaultDeliveryService implements DeliveryService {
 
     @Override
     public void onCourierArrived(Courier courier) {
-        logger.info("Courier {} arrived at the kitchen", courier.getId());
+        logger.info("Courier {} arrived at kitchen", courier.getId());
         Order order = strategy.getOrderForCourier(courier);
         if (order != null && order.getReadyTimeTimestamp() != null) {
             long orderWaitingTimeInMs = analyticsService.sendCourierArrivalEvent(order, Instant.now().toEpochMilli());
             logger.info(
-                "Courier {} received order {}, the order spend {} ms waiting for courier",
+                "Courier {} received order {}, order spend {} ms waiting for courier",
                 courier.getId(),
                 order.getId(),
                 orderWaitingTimeInMs

@@ -30,7 +30,7 @@ public class DefaultCouriersService implements CouriersService {
         int courierDelay = computeCourierDelayInMs();
         Courier courier = new Courier(courierId.getAndIncrement());
         scheduler.schedule(() -> courierIsReady(courier), courierDelay, TimeUnit.MILLISECONDS);
-        logger.info("Courier {} dispatched, he will arrive at the kitchen in {} seconds", courier.getId(), courierDelay / 1000);
+        logger.info("Courier {} dispatched, he will arrive at kitchen in {} seconds", courier.getId(), courierDelay / 1000);
         return courier;
     }
 

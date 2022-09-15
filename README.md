@@ -1,6 +1,6 @@
 ## Delivery System Simulation
 
-To run the project, run ```./gradlew run```
+```./gradlew run``` to run the project
 
 Results that I got on my machine:
 ```

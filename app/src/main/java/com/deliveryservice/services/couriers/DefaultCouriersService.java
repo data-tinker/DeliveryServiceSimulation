@@ -39,6 +39,7 @@ public class DefaultCouriersService implements CouriersService {
         couriersInProcess.getAndDecrement();
         courier.setArriveTimeTimestamp(Instant.now().toEpochMilli());
         deliveryService.onCourierArrived(courier);
+        logger.info("Courier {} arrived at kitchen", courier.getId());
     }
 
     @Override

@@ -64,7 +64,6 @@ public class DefaultDeliveryService implements DeliveryService {
 
     @Override
     public void onOrderFinished(Order order) {
-        logger.info("Order {} finished preparing", order.getId());
         Courier courier = strategy.getCourierForOrder(order);
         if (courier != null && courier.getArriveTimeTimestamp() != null) {
             long courierWaitingTimeInMs = analyticsService.sendOrderPickupEvent(courier, Instant.now().toEpochMilli());
@@ -83,7 +82,6 @@ public class DefaultDeliveryService implements DeliveryService {
 
     @Override
     public void onCourierArrived(Courier courier) {
-        logger.info("Courier {} arrived at kitchen", courier.getId());
         Order order = strategy.getOrderForCourier(courier);
         if (order != null && order.getReadyTimeTimestamp() != null) {
             long orderWaitingTimeInMs = analyticsService.sendCourierArrivalEvent(order, Instant.now().toEpochMilli());

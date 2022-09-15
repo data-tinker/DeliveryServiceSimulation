@@ -33,6 +33,7 @@ public class DefaultKitchenService implements KitchenService {
         ordersInProcess.getAndDecrement();
         order.setReadyTimeTimestamp(Instant.now().toEpochMilli());
         deliveryService.onOrderFinished(order);
+        logger.info("Order {} finished preparing", order.getId());
     }
 
     @Override
